@@ -1,6 +1,6 @@
 {
   "name": "underflag-mongoose",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "mongoose provider for underflag",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -22,7 +22,7 @@
     "mongoose"
   ],
   "author": "Diego Souza",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/dieg0s0uza/underflag-mongoose/issues"
   },
@@ -50,6 +50,6 @@
   },
   "dependencies": {
     "mongoose": "^5.13.14",
-    "underflag": "^1.0.0"
+    "underflag": "^1.3.0"
   }
 }
