@@ -4,12 +4,12 @@ import { MongooseDataProvider } from '../../src/providers/MongooseDataProvider';
 import config from './config.json';
 
 const print = async (underflag: Underflag, key: string) => {
-    const data = await underflag.get(key);
+    const data = await underflag.getFeature(key);
     return {
         key,
         status: isOn(data) ? 'on' : 'off',
-        value: data && data.value,
-        origin: data && data.origin
+        value: data?.value,
+        origin: data?.origin
     };
 };
 
