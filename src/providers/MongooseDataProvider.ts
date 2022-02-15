@@ -1,9 +1,9 @@
 import { Schema, model, Model, Connection } from 'mongoose';
-import { IDataProvider, Feature } from 'underflag';
+import { IDataProvider, BaseFeature } from 'underflag';
 
 const DEFAULT_COLLECTION = 'features';
 
-const schema = new Schema<Feature>({
+const schema = new Schema<BaseFeature>({
     key: { type: String, required: true, index: true },
     value: { type: Schema.Types.Mixed },
     description: String
@@ -17,24 +17,24 @@ interface Options {
 }
 
 export class MongooseDataProvider implements IDataProvider {
-    private featureModel: Model<Feature>;
+    private featureModel: Model<BaseFeature>;
     private connection: Connection | undefined;
 
     constructor(options?: Options) {
         if (options?.connection) {
             this.connection = options.connection;
-            this.featureModel = this.connection.model<Feature>('Feature', schema, options.collectionName || DEFAULT_COLLECTION);
+            this.featureModel = this.connection.model<BaseFeature>('BaseFeature', schema, options.collectionName || DEFAULT_COLLECTION);
         } else {
-            this.featureModel = model<Feature>('Feature', schema, options?.collectionName || DEFAULT_COLLECTION);
+            this.featureModel = model<BaseFeature>('BaseFeature', schema, options?.collectionName || DEFAULT_COLLECTION);
         }
     }
 
-    async getAll(): Promise<Feature[]> {
+    async getAll(): Promise<BaseFeature[]> {
         const results = await this.featureModel.find({});
         return results;
     }
 
-    async get(key: string): Promise<Feature | undefined> {
+    async get(key: string): Promise<BaseFeature | undefined> {
         const result = await this.featureModel.findOne({ key });
         if (!result) return undefined;
         return result;
